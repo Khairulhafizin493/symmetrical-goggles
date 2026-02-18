@@ -1,0 +1,706 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <title>WHO-ASSIST V3.1 – Formulir Lengkap P1–P8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: #e6ecf5;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .kertas {
+            max-width: 1440px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 25px 40px rgba(0,20,50,0.25);
+            padding: 25px 22px;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #003366;
+            border-left: 14px solid #1e7e34;
+            padding-left: 20px;
+            margin: 0 0 15px 0;
+            letter-spacing: -0.5px;
+            line-height: 1.3;
+        }
+        .identitas {
+            background: #f0f5fb;
+            border-radius: 50px;
+            padding: 14px 22px;
+            margin: 10px 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 30px;
+            font-weight: 600;
+            color: #1a3d5c;
+            font-size: 0.9rem;
+            border: 1px solid #cbdbe9;
+        }
+        .identitas span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .identitas input {
+            border: none;
+            border-bottom: 2px solid #9bb0c9;
+            background: transparent;
+            font-size: 0.9rem;
+            padding: 5px 8px;
+            width: 200px;
+            outline: none;
+            transition: 0.15s;
+        }
+        .identitas input:focus {
+            border-bottom-color: #1e7e34;
+        }
+        .intro {
+            background: #e3effa;
+            border-radius: 30px;
+            padding: 16px 24px;
+            margin-bottom: 25px;
+            border: 1px solid #b6d0e8;
+            font-size: 0.9rem;
+            color: #014682;
+            line-height: 1.6;
+        }
+        .intro strong {
+            color: #002856;
+        }
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 18px;
+            border: 1px solid #c6d8ec;
+            background: #fff;
+            -webkit-overflow-scrolling: touch;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1400px;
+            font-size: 0.8rem;
+        }
+        th {
+            background: #134b6b;
+            color: white;
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 12px 3px;
+            text-align: center;
+            vertical-align: middle;
+            border-right: 1px solid #36698b;
+            line-height: 1.3;
+            white-space: normal;
+        }
+        th:last-child { border-right: none; }
+        td {
+            padding: 8px 3px;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #dde9f5;
+            background-color: white;
+        }
+        .zat {
+            background: #f1f9ff;
+            font-weight: 600;
+            text-align: left;
+            padding: 8px 5px 8px 12px;
+            width: 210px;
+            font-size: 0.8rem;
+            white-space: normal;
+            word-break: break-word;
+        }
+        .zat input {
+            margin-left: 6px;
+            padding: 4px 8px;
+            width: 100px;
+            border: 1px solid #a3bbd4;
+            border-radius: 30px;
+            font-size: 0.7rem;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .radio-group label {
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+        select {
+            padding: 6px 4px;
+            border-radius: 30px;
+            border: 1px solid #9fb7cf;
+            background: white;
+            font-size: 0.7rem;
+            font-weight: 500;
+            min-width: 90px;
+            max-width: 110px;
+            cursor: pointer;
+        }
+        select:disabled {
+            background: #edf2f8;
+            color: #5f7892;
+            border-color: #c1d2e3;
+        }
+        .skor {
+            display: inline-block;
+            background: #134b6b;
+            color: white;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            min-width: 40px;
+        }
+        .intervensi {
+            font-weight: 600;
+            padding: 4px 6px;
+            border-radius: 40px;
+            background: #e0f0e0;
+            color: #13582e;
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+        .intervensi.sedang { background: #fff2cc; color: #7a6100; }
+        .intervensi.tinggi { background: #fad7da; color: #a5232e; }
+        .suntik-wrapper {
+            background: #f0f4fa;
+            border-radius: 28px;
+            padding: 18px 24px;
+            margin: 20px 0;
+            border: 1px solid #bed3e8;
+        }
+        .suntik-judul {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #113f5c;
+            margin-bottom: 10px;
+        }
+        .suntik-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .suntik-box {
+            background: white;
+            border-radius: 60px;
+            padding: 12px 22px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            flex: 1 1 300px;
+        }
+        .suntik-box select {
+            min-width: 240px;
+            font-size: 0.85rem;
+            padding: 8px 12px;
+            flex: 1 1 auto;
+        }
+        .pola-box {
+            background: #d7ecda;
+            border-radius: 40px;
+            padding: 10px 22px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            font-weight: 500;
+            flex: 1 1 300px;
+        }
+        .pola-box label {
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .rekom-p8 {
+            background: white;
+            border-radius: 30px;
+            padding: 4px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .catatan {
+            background: #e6f4e6;
+            border-radius: 24px;
+            padding: 16px 24px;
+            margin: 25px 0;
+            border-left: 10px solid #1a7640;
+        }
+        .catatan h3 {
+            color: #155f31;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .catatan ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px 30px;
+            list-style: none;
+            padding-left: 5px;
+            font-size: 0.85rem;
+        }
+        hr {
+            border: 1px dashed #b9cedf;
+            margin: 25px 0;
+        }
+        .footer {
+            background: #e2ebf5;
+            border-radius: 40px;
+            padding: 12px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: #144a6f;
+        }
+        .btn {
+            border: none;
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.8rem;
+        }
+        .btn-pdf { background: #1d7a3c; color: white; }
+        .btn-pdf:hover { background: #135e2d; }
+        .btn-reset { background: #c0323f; color: white; }
+        .btn-reset:hover { background: #9e2530; }
+        .inisial {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.65rem;
+            color: #5f7d9c;
+            letter-spacing: 1px;
+            border-top: 1px dotted #b0c8dd;
+            padding-top: 12px;
+        }
+        @media (max-width: 700px) {
+            .identitas input { width: 150px; }
+            .suntik-box, .pola-box { flex-direction: column; align-items: stretch; }
+        }
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0.6cm;
+            }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .kertas {
+                box-shadow: none;
+                padding: 0.2cm;
+                max-width: 100%;
+                border-radius: 0;
+            }
+            .btn, .btn-pdf, .btn-reset, .inisial {
+                display: none;
+            }
+            .identitas input {
+                border-bottom: 1px solid #333;
+                background: transparent;
+            }
+            select {
+                border: 1px solid #333;
+                background: white;
+                -webkit-appearance: none;
+                appearance: none;
+            }
+            th {
+                background: #134b6b !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .skor, .intervensi, .catatan, .suntik-wrapper {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .table-scroll {
+                overflow: visible !important;
+                border: 1px solid #aaa;
+                page-break-inside: avoid;
+            }
+            table {
+                font-size: 0.65rem;
+                min-width: 100%;
+                width: 100%;
+            }
+            th, td {
+                padding: 4px 2px;
+            }
+            .zat {
+                width: auto;
+            }
+            tr {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="kertas">
+    <h1>WHO - ASSIST V3.1 (P1–P8)</h1>
+
+    <!-- Identitas pasien dan pewawancara -->
+    <div class="identitas">
+        <span>NAMA PASIEN <input type="text" placeholder="Nama lengkap" id="nama"></span>
+        <span>TANGGAL <input type="text" placeholder="dd/mm/yyyy" id="tgl"></span>
+        <span>PEWANCARA <input type="text" placeholder="Nama pewawancara" id="pencacah"></span>
+    </div>
+
+    <!-- Pendahuluan -->
+    <div class="intro">
+        <strong>PENDAHULUAN (bacakan)</strong> – Pertanyaan ini menanyakan pengalaman Anda menggunakan alkohol, tembakau, dan zat adiktif lainnya seumur hidup dan dalam 3 bulan terakhir. Zat dapat dihisap, ditelan, dihirup, atau disuntik. <strong>Obat sesuai resep dokter tidak dicatat</strong>, kecuali digunakan di luar ketentuan. Semua informasi dirahasiakan.
+    </div>
+
+    <!-- Tabel P1–P7 -->
+    <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>Zat (hanya non-medis)</th>
+                    <th>P1<br>Seumur hidup pernah?</th>
+                    <th>P2<br>3 bln: frekuensi pakai</th>
+                    <th>P3<br>3 bln: keinginan kuat</th>
+                    <th>P4<br>3 bln: masalah kesehatan/sosial/hukum</th>
+                    <th>P5<br>3 bln: gagal tugas (kerja/sekolah)</th>
+                    <th>P6<br>Orang lain khawatir?</th>
+                    <th>P7<br>Gagal mengurangi/berhenti?</th>
+                    <th>Skor SSI</th>
+                    <th>Intervensi</th>
+                </tr>
+            </thead>
+            <tbody id="tbod"></tbody>
+        </table>
+    </div>
+
+    <!-- Pertanyaan P8 (suntik) -->
+    <div class="suntik-wrapper">
+        <div class="suntik-judul">❓ PERTANYAAN 8 – MENYUNTIK</div>
+        <div class="suntik-row">
+            <div class="suntik-box">
+                <span style="font-weight:700;">P8. Pernah menyuntik obat non-medis?</span>
+                <select id="p8">
+                    <option value="0" selected>Tidak pernah (0)</option>
+                    <option value="2">Ya, dalam 3 bulan terakhir (2)</option>
+                    <option value="1">Ya, tapi tidak dalam 3 bulan terakhir (1)</option>
+                </select>
+            </div>
+            <div id="polaContainer" style="display: none;" class="pola-box">
+                <span>💉 Pola suntik (3 bln):</span>
+                <label><input type="radio" name="pola" value="ringan" checked> ≤4 hari/bulan</label>
+                <label><input type="radio" name="pola" value="berat"> >4 hari/bulan</label>
+                <span id="rekomP8" class="rekom-p8">Intervensi singkat</span>
+            </div>
+        </div>
+        <p style="font-size:0.7rem; margin-top:8px;">* Jika P8 = Ya 3 bulan terakhir, tentukan pola suntik.</p>
+    </div>
+
+    <!-- Catatan skoring -->
+    <div class="catatan">
+        <h3>📊 Cara menghitung skor SSI</h3>
+        <p>Jumlahkan P2 + P3 + P4 + P5 + P6 + P7. <strong>Kecuali tembakau: tanpa P5.</strong> Skor menentukan intervensi:</p>
+        <ul>
+            <li><strong>Tembakau:</strong> 0–3 = tanpa | 4–26 = singkat | 27+ = intensif</li>
+            <li><strong>Alkohol:</strong> 0–10 = tanpa | 11–26 = singkat | 27+ = intensif</li>
+            <li><strong>Zat lain:</strong> 0–3 = tanpa | 4–26 = singkat | 27+ = intensif</li>
+        </ul>
+    </div>
+
+    <hr>
+    <div class="footer">
+        <span>⏱️ Jika semua P1 "Tidak", hentikan. Jika semua P2 "Tidak", loncat ke P6.</span>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn btn-pdf" id="pdfBtn">📥 Download PDF</button>
+            <button class="btn btn-reset" id="resetBtn">↻ Reset</button>
+        </div>
+    </div>
+
+    <!-- Nama pencipta -->
+    <div class="inisial">✧ Khairul hafizin ✧</div>
+</div>
+
+<script>
+(function() {
+    // Daftar zat sesuai ASSIST
+    const zat = [
+        { id: 'tembakau', label: 'a. Tembakau (rokok, cerutu, kretek)' },
+        { id: 'alkohol', label: 'b. Alkohol (bir, anggur, sopi, tuak)' },
+        { id: 'ganja', label: 'c. Ganja (marijuana, gelek, cimeng)' },
+        { id: 'kokain', label: 'd. Kokain (coke, crack)' },
+        { id: 'amfetamin', label: 'e. Amfetamin (ekstasi, shabu)' },
+        { id: 'inhalan', label: 'f. Inhalan (lem, bensin, tiner)' },
+        { id: 'sedativa', label: 'g. Sedativa (benzodiazepin, lexotan, rohypnol)' },
+        { id: 'halusinogen', label: 'h. Halusinogen (LSD, jamur, PCP)' },
+        { id: 'opioid', label: 'i. Opioid (heroin, morfin, metadon)' },
+        { id: 'lain', label: 'j. Lainnya – sebutkan', input: true }
+    ];
+
+    // Fungsi pembuat select dengan nilai yang benar (sesuai ASSIST)
+    function buatSelectP2(disabled) {
+        let s = document.createElement('select');
+        [ {val:0, txt:'Tidak pernah (0)'}, {val:2, txt:'Sekali/dua kali (2)'}, {val:3, txt:'Tiap bulan (3)'}, {val:4, txt:'Tiap minggu (4)'}, {val:6, txt:'Selalu/hampir selalu (6)'} ].forEach(o => {
+            let opt = document.createElement('option');
+            opt.value = o.val;
+            opt.textContent = o.txt;
+            s.appendChild(opt);
+        });
+        s.disabled = disabled;
+        return s;
+    }
+    function buatSelectP3(disabled) {
+        let s = document.createElement('select');
+        [ {val:0, txt:'Tidak pernah (0)'}, {val:3, txt:'Sekali/dua kali (3)'}, {val:4, txt:'Tiap bulan (4)'}, {val:5, txt:'Tiap minggu (5)'}, {val:6, txt:'Selalu/hampir selalu (6)'} ].forEach(o => {
+            let opt = document.createElement('option');
+            opt.value = o.val;
+            opt.textContent = o.txt;
+            s.appendChild(opt);
+        });
+        s.disabled = disabled;
+        return s;
+    }
+    function buatSelectP4(disabled) {
+        let s = document.createElement('select');
+        [ {val:0, txt:'Tidak pernah (0)'}, {val:4, txt:'Satu/dua kali (4)'}, {val:5, txt:'Tiap bulan (5)'}, {val:6, txt:'Tiap minggu (6)'}, {val:7, txt:'Selalu/hampir selalu (7)'} ].forEach(o => {
+            let opt = document.createElement('option');
+            opt.value = o.val;
+            opt.textContent = o.txt;
+            s.appendChild(opt);
+        });
+        s.disabled = disabled;
+        return s;
+    }
+    function buatSelectP5(disabled) {
+        let s = document.createElement('select');
+        [ {val:0, txt:'Tidak pernah (0)'}, {val:5, txt:'Satu/dua kali (5)'}, {val:6, txt:'Tiap bulan (6)'}, {val:7, txt:'Tiap minggu (7)'}, {val:8, txt:'Selalu/hampir selalu (8)'} ].forEach(o => {
+            let opt = document.createElement('option');
+            opt.value = o.val;
+            opt.textContent = o.txt;
+            s.appendChild(opt);
+        });
+        s.disabled = disabled;
+        return s;
+    }
+    function buatSelectP6(disabled) {
+        let s = document.createElement('select');
+        [ {val:0, txt:'Tidak pernah (0)'}, {val:6, txt:'Ya, 3 bln terakhir (6)'}, {val:3, txt:'Ya, dulu (3)'} ].forEach(o => {
+            let opt = document.createElement('option');
+            opt.value = o.val;
+            opt.textContent = o.txt;
+            s.appendChild(opt);
+        });
+        s.disabled = disabled;
+        return s;
+    }
+    function buatSelectP7(disabled) {
+        let s = document.createElement('select');
+        [ {val:0, txt:'Tidak pernah (0)'}, {val:6, txt:'Ya, 3 bln terakhir (6)'}, {val:3, txt:'Ya, dulu (3)'} ].forEach(o => {
+            let opt = document.createElement('option');
+            opt.value = o.val;
+            opt.textContent = o.txt;
+            s.appendChild(opt);
+        });
+        s.disabled = disabled;
+        return s;
+    }
+
+    const tbody = document.getElementById('tbod');
+
+    function render() {
+        tbody.innerHTML = '';
+        zat.forEach(z => {
+            let tr = document.createElement('tr');
+            tr.dataset.zat = z.id;
+
+            let tdZ = document.createElement('td');
+            tdZ.className = 'zat';
+            tdZ.textContent = z.label;
+            if (z.input) {
+                let inp = document.createElement('input');
+                inp.placeholder = 'sebut...';
+                inp.id = 'input_' + z.id;
+                tdZ.appendChild(inp);
+            }
+            tr.appendChild(tdZ);
+
+            let tdP1 = document.createElement('td');
+            tdP1.innerHTML = `<div class="radio-group"><label><input type="radio" name="p1_${z.id}" value="pernah" checked> Pernah</label><label><input type="radio" name="p1_${z.id}" value="tidak"> Tidak</label></div>`;
+            tr.appendChild(tdP1);
+
+            tr.appendChild(buatKolom(buatSelectP2, false));
+            tr.appendChild(buatKolom(buatSelectP3, false));
+            tr.appendChild(buatKolom(buatSelectP4, false));
+            tr.appendChild(buatKolom(buatSelectP5, false));
+            tr.appendChild(buatKolom(buatSelectP6, false));
+            tr.appendChild(buatKolom(buatSelectP7, false));
+
+            let tdSkor = document.createElement('td');
+            let spanSkor = document.createElement('span');
+            spanSkor.className = 'skor';
+            spanSkor.id = 'skor_' + z.id;
+            spanSkor.textContent = '0';
+            tdSkor.appendChild(spanSkor);
+            tr.appendChild(tdSkor);
+
+            let tdInter = document.createElement('td');
+            let spanInter = document.createElement('span');
+            spanInter.className = 'intervensi';
+            spanInter.id = 'inter_' + z.id;
+            spanInter.textContent = 'Tidak ada intervensi';
+            tdInter.appendChild(spanInter);
+            tr.appendChild(tdInter);
+
+            tbody.appendChild(tr);
+        });
+
+        // Event listener untuk radio P1
+        document.querySelectorAll('input[type="radio"][name^="p1_"]').forEach(r => {
+            r.addEventListener('change', function(e) {
+                let id = this.name.replace('p1_', '');
+                updateRowState(id, this.value);
+                hitungSkor();
+            });
+        });
+
+        // Event listener untuk semua select
+        document.querySelectorAll('select').forEach(s => s.addEventListener('change', hitungSkor));
+
+        // Set semua baris ke status 'pernah' di awal
+        zat.forEach(z => updateRowState(z.id, 'pernah'));
+        hitungSkor();
+
+        // Event listener untuk P8
+        document.getElementById('p8').addEventListener('change', function() {
+            let v = this.value;
+            let cont = document.getElementById('polaContainer');
+            cont.style.display = v === '2' ? 'flex' : 'none';
+            if (v === '2') updateRekomP8();
+        });
+
+        document.querySelectorAll('input[name="pola"]').forEach(r => r.addEventListener('change', updateRekomP8));
+    }
+
+    function buatKolom(fn, disabled) {
+        let td = document.createElement('td');
+        td.appendChild(fn(disabled));
+        return td;
+    }
+
+    function updateRowState(zatId, nilai) {
+        let row = Array.from(document.querySelectorAll('tr[data-zat]')).find(r => r.dataset.zat === zatId);
+        if (!row) return;
+        let selects = row.querySelectorAll('select');
+        let disable = (nilai === 'tidak');
+        selects.forEach(s => {
+            s.disabled = disable;
+            if (disable) s.value = '0';
+        });
+    }
+
+    function hitungSkor() {
+        zat.forEach(z => {
+            let row = document.querySelector(`tr[data-zat="${z.id}"]`);
+            if (!row) return;
+            let pernah = row.querySelector(`input[name="p1_${z.id}"][value="pernah"]`).checked;
+            let inter = document.getElementById(`inter_${z.id}`);
+            inter.className = 'intervensi'; // reset class
+            if (!pernah) {
+                document.getElementById(`skor_${z.id}`).textContent = '0';
+                inter.textContent = 'Tidak ada intervensi';
+                return;
+            }
+            let sel = row.querySelectorAll('select');
+            let p2 = +sel[0].value,
+                p3 = +sel[1].value,
+                p4 = +sel[2].value,
+                p5 = +sel[3].value,
+                p6 = +sel[4].value,
+                p7 = +sel[5].value;
+
+            let skor = (z.id === 'tembakau') ? p2 + p3 + p4 + p6 + p7 : p2 + p3 + p4 + p5 + p6 + p7;
+            document.getElementById(`skor_${z.id}`).textContent = skor;
+
+            if (z.id === 'alkohol') {
+                if (skor <= 10) inter.textContent = 'Tidak ada intervensi';
+                else if (skor <= 26) {
+                    inter.textContent = 'Intervensi singkat';
+                    inter.classList.add('sedang');
+                } else {
+                    inter.textContent = 'Intervensi intensif';
+                    inter.classList.add('tinggi');
+                }
+            } else {
+                if (skor <= 3) inter.textContent = 'Tidak ada intervensi';
+                else if (skor <= 26) {
+                    inter.textContent = 'Intervensi singkat';
+                    inter.classList.add('sedang');
+                } else {
+                    inter.textContent = 'Intervensi intensif';
+                    inter.classList.add('tinggi');
+                }
+            }
+        });
+    }
+
+    function updateRekomP8() {
+        let p8val = document.getElementById('p8').value;
+        if (p8val !== '2') return;
+        let pola = document.querySelector('input[name="pola"]:checked').value;
+        let rekom = document.getElementById('rekomP8');
+        rekom.textContent = (pola === 'ringan') ? 'Intervensi singkat + kartu risiko' : 'Asesmen lanjutan & pengobatan intensif';
+    }
+
+    function resetAll() {
+        document.getElementById('nama').value = '';
+        document.getElementById('tgl').value = '';
+        document.getElementById('pencacah').value = '';
+        document.querySelectorAll('input[type="radio"][value="pernah"]').forEach(r => r.checked = true);
+        document.querySelectorAll('select').forEach(s => s.value = '0');
+        document.querySelectorAll('select').forEach(s => s.disabled = false);
+        document.getElementById('p8').value = '0';
+        document.getElementById('polaContainer').style.display = 'none';
+        let ringan = document.querySelector('input[name="pola"][value="ringan"]');
+        if (ringan) ringan.checked = true;
+        hitungSkor();
+    }
+
+    window.onload = function() {
+        render();
+        document.getElementById('resetBtn').addEventListener('click', resetAll);
+        document.getElementById('pdfBtn').addEventListener('click', () => window.print());
+    };
+})();
+</script>
+</body>
+</html>
+```
